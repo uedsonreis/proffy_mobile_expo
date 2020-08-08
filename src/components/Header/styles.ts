@@ -4,8 +4,9 @@ import Constants from 'expo-constants'
 export default StyleSheet.create({
 
     container: {
-        backgroundColor: '#8257e5',
         paddingTop: 50 + Constants.statusBarHeight,
+        backgroundColor: '#8257e5',
+        paddingBottom: 60,
         padding: 40,
     },
 
@@ -16,6 +17,12 @@ export default StyleSheet.create({
     logoImage: {
         width: 40,
         height: 15,
+    },
+
+    titleHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 
     titleText: {

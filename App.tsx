@@ -3,6 +3,10 @@ import { AppLoading } from 'expo'
 import { StatusBar } from 'expo-status-bar'
 import { Archivo_400Regular, Archivo_700Bold, useFonts } from '@expo-google-fonts/archivo'
 import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+
+import { store, persistor } from './src/store'
 
 import Router from './src/routes'
 
@@ -16,10 +20,12 @@ export default function App() {
     if (!fontsLoaded) return <AppLoading />
 
     return (
-        <>
-            <StatusBar style="light" />
-            <Router />
-        </>
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
+                <StatusBar style="light" />
+                <Router />
+            </PersistGate>
+        </Provider>
     )
 
 }

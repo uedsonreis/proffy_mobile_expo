@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Image, Text, View } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
 
@@ -14,10 +14,16 @@ export function Logo() {
     )
 }
 
-export function Title({ text }: any) {
+type TitleProps = { text: string, right?: ReactNode, children?: ReactNode }
+
+export function Title({ text, right, children }: any) {
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>{text}</Text>
+            <View style={styles.titleHeader}>
+                <Text style={styles.titleText}>{text}</Text>
+                {right}
+            </View>
+            {children}
         </View>
     )
 }

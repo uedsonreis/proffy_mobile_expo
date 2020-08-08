@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+
+import api from '../../services/api'
 
 import landingImg from '../../assets/images/landing.png'
 import studyIcon from '../../assets/images/icons/study.png'
@@ -8,12 +11,17 @@ import classIcon from '../../assets/images/icons/give-classes.png'
 import heartIcon from '../../assets/images/icons/heart.png'
 
 import styles from './styles'
-import { useNavigation } from '@react-navigation/native'
 
 function Landing() {
 
+    const [total, setTotal] = useState<number>(0)
+
     const navigation = useNavigation()
     navigation.setOptions({ headerTransparent: true, headerRight: undefined })
+
+    useEffect(() => {
+        api.getConnections().then(connections => setTotal(connections.total))
+    }, [])
 
     function goToTeacherPage() {
         navigation.navigate('teacher')
@@ -45,7 +53,7 @@ function Landing() {
             </View>
 
             <Text style={styles.totalConnections}>
-                Total de 285 conexões já realizadas {' '}
+                Total de {total} conexões já realizadas {' '}
                 <Image source={heartIcon} style={{ width: 14, height: 12 }} />
             </Text>
 
